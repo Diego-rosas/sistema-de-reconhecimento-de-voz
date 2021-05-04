@@ -58,11 +58,55 @@ aplicarCorNaCaixa(sortearCor());
 
 
 //API DE RECONHECIMENTO DE VOZ
+var btnGravador = document.getElementById("btn-responder");
+var transcricaoAudio = "";
+var respostaCorreta = "";
+
+
 
 if(window.SpeechRecognition || window.webkitSpeechRecognition){
-    alert('tem suporte');
+    var SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var gravador = new SpeechAPI();
+    
+    gravador.continuos = false;
+    gravador.lang = "en-US";
+
+//EVENTOS DO GRAVADOR
+    gravador.onstart = function(){
+        btnGravador.innerText = "Estou Ouvindo";
+        btnGravador.style.backgroundColor = "white";
+        btnGravador.style.color = "black";
+    }
+    
+    gravador.onend = function(){
+        btnGravador.innerText = "Responder";
+        btnGravador.style.backgroundColor = "transparent";
+        btnGravador.style.color = "white";    
+    }
+
+    gravador.onresult = function(event){
+        transcricaoAudio = event.results[0][0].transcript.toUpperCase();
+        respostaCorreta = document.getElementById('cor-na-caixa').innerText.toUpperCase();
+        
+        if(transcricaoAudio === respostaCorreta){
+            atualizaPontuacao(1);    
+        }else{
+            atualizaPontuacao(-1);
+        }
+
+        aplicarCorNaCaixa(sortearCor());
+
+        console.log(transcricaoAudio);
+    }     
+
+
 }else{
     alert('não tem suporte');
 }
 
-  
+//ADICIONA O EVENTO DE OUVIR TODA VEZ QUE O BTN FOR CLICADO
+btnGravador.addEventListener('click', function(){
+    gravador.start();
+})
+
+
