@@ -15,8 +15,8 @@ var engine = {
 }
 
 //DECLARA OS AUDIOS PARA A FUNÇÃO DE ACRETOU E ERROU
-const audioMoeda = new Audio('/audio/moeda.mp3');
-const audioErrou = new Audio('/audio/errou.mp3');
+const audioMoeda = new Audio('../audio/moeda.mp3');
+const audioErrou = new Audio('../audio/errou.mp3');
 
 //FUNÇÃO PARA SORTEAR O NOME DAS CORES E PASSAR O SEU VALOR HEXADECIMAL 
 function sortearCor(){
@@ -34,7 +34,7 @@ function aplicarCorNaCaixa(nomeDaCor) {
     var caixaDasCores = document.getElementById('cor-atual');
 
     caixaDasCores.style.backgroundColor = nomeDaCor; 
-    caixaDasCores.style.backgroundImage = "url('/img/caixa-fechada.png')";
+    caixaDasCores.style.backgroundImage = "url(../img/caixa-fechada.png)";
     caixaDasCores.style.backgroundSize = "100%";
 
 }
