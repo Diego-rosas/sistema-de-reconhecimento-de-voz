@@ -1,3 +1,4 @@
+//ENGINE DO JOGO
 var engine = {
     "cores": ['green', 'purple', 'pink', 'red', 'yellow', 'orange', 'grey', 'black'],
     "hexadecimais":{
@@ -13,10 +14,11 @@ var engine = {
     "moedas": 0
 }
 
+//DECLARA OS AUDIOS PARA A FUNÇÃO DE ACRETOU E ERROU
 const audioMoeda = new Audio('../audio/moeda.mp3');
 const audioErrou = new Audio('../audio/errou.mp3');
 
-
+//FUNÇÃO PARA SORTEAR O NOME DAS CORES E PASSAR O SEU VALOR HEXADECIMAL 
 function sortearCor(){
     var indexCorSorteada = Math.floor(Math.random() * engine.cores.length);
     var legendaCorDaCaixa = document.getElementById('cor-na-caixa'); 
@@ -27,6 +29,7 @@ function sortearCor(){
     return engine.hexadecimais[nomeCorSorteada];
 }
 
+//FUNÇÃO PARA MUDAR A COR DA CAIXA
 function aplicarCorNaCaixa(nomeDaCor) {
     var caixaDasCores = document.getElementById('cor-atual');
 
@@ -35,7 +38,7 @@ function aplicarCorNaCaixa(nomeDaCor) {
     caixaDasCores.style.backgroundSize = "100%";
 
 }
-
+//FUNÇÃO PARA MUDAR O VALOR DA MOEDA E TOCAR OS SONS
 function atualizaPontuacao(valor) {
     var pontuacao = document.getElementById('pontuacao-atual');
     
@@ -50,3 +53,16 @@ function atualizaPontuacao(valor) {
     pontuacao.innerText = engine.moedas;
 }
 
+//SORTEIA AS CORES
+aplicarCorNaCaixa(sortearCor());
+
+
+//API DE RECONHECIMENTO DE VOZ
+
+if(window.SpeechRecognition || window.webkitSpeechRecognition){
+    alert('tem suporte');
+}else{
+    alert('não tem suporte');
+}
+
+  
